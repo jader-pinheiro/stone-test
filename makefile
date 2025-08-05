@@ -1,8 +1,5 @@
 .PHONY: all setup deps env start db
 
-# Diretório do projeto
-REPO_DIR=stone-test
-
 # Alvo principal
 all: setup
 
@@ -15,12 +12,12 @@ db:
 
 # Instala dependências do Go
 deps:
-	cd $(REPO_DIR) && go mod tidy
+	go mod tidy
 
 # Carrega variáveis de ambiente do .env
 env:
-	cd $(REPO_DIR) && set -a && source .env && set +a
+	set -a && source .env && set +a
 
 # Inicia o aplicativo
 start:
-	cd $(REPO_DIR) && go run main.go
+	go run main.go
