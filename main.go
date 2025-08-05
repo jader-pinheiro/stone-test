@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"log"
-	"os"
 	"stone-test/internal/infra/db"
 	"stone-test/internal/ui/routes"
 	"stone-test/internal/utils"
@@ -25,7 +24,7 @@ func main() {
 
 	//connection to PostgreSQL using pgx
 	ctx := context.Background()
-	dsnPgx := os.Getenv("GORM_DSN")
+	dsnPgx := "postgres://postgres:passwd@127.0.0.1:5432/stone_test?sslmode=disable"
 	pool, err := pgxpool.New(ctx, dsnPgx)
 	if err != nil {
 		log.Fatalf("Erro ao criar pool: %v", err)

@@ -4,7 +4,7 @@
 all: setup
 
 # Etapas agrupadas
-setup: db deps env
+setup: db deps
 
 # Sobe banco de dados com Docker Compose
 db:
@@ -14,10 +14,6 @@ db:
 deps:
 	go mod tidy
 
-# Carrega variáveis de ambiente do .env
-env:
-	set -a && source .env && set +a
-
 # Inicia o aplicativo
 start:
-	go run main.go
+	go run .

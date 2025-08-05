@@ -1,8 +1,6 @@
 package db
 
 import (
-	"fmt"
-	"os"
 	"stone-test/internal/infra/entity"
 
 	"gorm.io/driver/postgres"
@@ -10,11 +8,7 @@ import (
 )
 
 func Connect() (*gorm.DB, error) {
-	dsn := os.Getenv("GORM_DSN")
-
-	if dsn == "" {
-		return nil, fmt.Errorf("GORM_DSN environment variable not set")
-	}
+	dsn := "postgres://postgres:passwd@127.0.0.1:5432/stone_test?sslmode=disable"
 
 	// Conectando ao banco de dados PostgreSQL com GORM
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
