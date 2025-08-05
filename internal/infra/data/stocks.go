@@ -53,16 +53,25 @@ type ticker struct {
 func GetTickerData(db *gorm.DB, ctx context.Context, instrumentCode string, businessDate *time.Time) (ticker, error) {
 	var result ticker
 
+	location, err := time.LoadLocation("America/Sao_Paulo")
+	if err != nil {
+		return ticker{}, fmt.Errorf("erro ao carregar timezone: %w", err)
+	}
+
 	query := db.WithContext(ctx).
 		Table("stocks").
 		Select("instrument_code AS ticker, MAX(business_price) AS max_range_value, MAX(negotiated_quantity) AS max_daily_volume").
 		Where("instrument_code = ?", instrumentCode)
 
 	if businessDate != nil {
-		query = query.Where("business_date >= ?", *businessDate)
+		startDateInLoc := businessDate.In(location)
+		query = query.Where("business_date >= ?", startDateInLoc)
 	} else {
-		end := time.Now().AddDate(0, 0, -1).Truncate(24 * time.Hour)
+		end := time.Now().In(location).AddDate(0, 0, -1)
 		start := end.AddDate(0, 0, -6)
+
+		start = time.Date(start.Year(), start.Month(), start.Day(), 0, 0, 0, 0, location)
+		end = time.Date(end.Year(), end.Month(), end.Day(), 23, 59, 59, 0, location)
 		query = query.Where("business_date BETWEEN ? AND ?", start, end)
 	}
 
