@@ -34,9 +34,16 @@ func GetTicker(db *gorm.DB) func(ctx *fiber.Ctx) error {
 
 		data, err := data.GetTickerData(db, ctx.Context(), ticker, startDatePtr)
 		if err != nil {
+			return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"status": fiber.StatusBadRequest,
+				"msg":    err.Error(),
+			})
+		}
+
+		if data.Ticker == "" {
 			return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{
 				"status": fiber.StatusNotFound,
-				"msg":    err.Error(),
+				"msg":    "Nenhum dado encontrado para o ticker informado.",
 			})
 		}
 

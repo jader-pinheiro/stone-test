@@ -1,4 +1,4 @@
-.PHONY: all setup deps env start db
+.PHONY: all setup deps start db
 
 # Alvo principal
 all: setup
@@ -6,14 +6,15 @@ all: setup
 # Etapas agrupadas
 setup: db deps
 
-# Sobe banco de dados com Docker Compose
+# Remove container antigo e volumes (dados), e sobe o banco de dados limpo
 db:
+	docker-compose down -v
 	docker-compose up -d
 
 # Instala dependências do Go
 deps:
 	go mod tidy
 
-# Inicia o aplicativo
+# Remove container antigo, sobe banco e roda app
 start:
 	go run .

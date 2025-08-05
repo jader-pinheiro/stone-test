@@ -1,4 +1,4 @@
-# Credito Acordo
+# Stone Teste
 
 `stone-test` Contempla os requisitos do teste realizado para a Stone .
 
@@ -18,7 +18,7 @@
   ```
 - Após ter baixado o binário export o path do Go
      ```bash
-    Entre na pasta home $ cd ~ 
+    Entre na pasta home $ cd ~
     e edite o aquivo .profile
     adicionando a linha no  arquivo:: export PATH=$PATH:/usr/local/go/bin
 
@@ -33,10 +33,18 @@
 ## Instalação e Execução
 
 ### 1. Clone o repositório: https://github.com/jader-pinheiro/stone-test.git
+
+Após clonar o repositório baixe os arquivos de stokes e coloque eles dentro da pasta `file` que se encontra na raiz do projeto
+com o comando make start a aplicação irá processar os arquivos fazendo a inserção no banco de dados e após o término
+a API de consulta estará disponível no seguinte endpoint:
+
+``localhost:3000/ticker/DIIF30F31?startDate=2025-07-28``
+
+Conforme solicitado pela documentação do teste o parametro startDate não é obrigatório
    ```bash
-    Dentro do repositório poderá usar os comandos do makefile:
+    Dentro do repositório execute os comandos do makefile nessa ordem:
 
-    make → executa docker-compose up -d, go mod tidy, e carrega .env
-
-    make start → roda a aplicação
+    make db → sobe o container do Postgres
+    make deps → baixa as dependencias do projeto
+    make start → roda a aplicação em golang, 
   ```
