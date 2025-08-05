@@ -34,7 +34,7 @@
 
 ### 1. Clone o repositório: https://github.com/jader-pinheiro/stone-test.git
 
-Após clonar o repositório baixe os arquivos de stokes e coloque eles dentro da pasta `file` que se encontra na raiz do projeto
+Após clonar o repositório baixe os arquivos de stokes descompacte ele, os arquivos baixados estarão em .txt e deverão permanecer nessa extensão pois o processamento está para arquivos .txt e coloque eles dentro da pasta `file` que se encontra na raiz do projeto
 com o comando make start a aplicação irá processar os arquivos fazendo a inserção no banco de dados e após o término
 a API de consulta estará disponível no seguinte endpoint:
 
