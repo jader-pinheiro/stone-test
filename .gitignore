@@ -1,0 +1,8 @@
+/bkp-files/*
+.vscode/
+/file/*
+!/file/.gitKeep
+
+
+
+
