@@ -2,7 +2,6 @@ package routes
 
 import (
 	"log"
-	"os"
 	"stone-test/internal/ui"
 
 	"github.com/gofiber/fiber/v2"
@@ -22,6 +21,6 @@ func GetRoutes(conn *gorm.DB) {
 		})
 	})
 
-	log.Fatal(app.Listen(":" + os.Getenv("PORT")))
+	log.Fatal(app.Listen(":" + "3000"))
 
 }
